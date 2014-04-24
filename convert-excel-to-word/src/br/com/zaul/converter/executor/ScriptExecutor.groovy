@@ -15,7 +15,7 @@ class ScriptExecutor {
 	 * @param args
 	 */
 	static main(args) {
-		println 'Iniciando a conversão'
+		println '##### Iniciando a conversão'
 	
 		def excelReader = new ExcelReader()
 		def wordWriter = new WordWriter()
@@ -24,7 +24,7 @@ class ScriptExecutor {
 		def list = excelReader.createList(workbook)
 		wordWriter.write(list)
 		
-		println 'Fim da conversão'
+		println '##### Fim da conversão'
 	}
 
 }

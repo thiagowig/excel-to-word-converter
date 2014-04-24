@@ -99,7 +99,7 @@ class WordWriter {
 		def fileName = "resources/output/${service.name}.docx"
 		def outputStream = new FileOutputStream(new File(fileName))
 		document.write(outputStream)
-		outputStream.close();
+		outputStream.close()
 		
 		println "Arquivo '${fileName}' criado"
 	}

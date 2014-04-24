@@ -2,39 +2,33 @@ package br.com.zaul.converter.converter;
 
 enum ColumnEnum {
 
-	NAME("getName", "setName", 2, "Nome"),
-	DESCRIPTION("getDescription", "setDescription", 3, "Descrição"),
-	ASSOCIATED_BUSINESS_PROCESS("getAssociatedBusinessProcess", "setAssociatedBusinessProcess", 4, "Processo de Negócio Associados"),
-	FUNCTIONAL_AREAS("getFunctionalAreas", "setFunctionalAreas", 5, "Áreas Funcionais"),
-	BUSINESS_ACTORES("getBusinessActores", "setBusinessActores", 6, "Atores do Negócio"),
-	CONTRACT_AND_OPERATIONS("getContractAndOperations", "setContractAndOperations", 7, "Contratos e Operações"),
-	OPERATIONS_MESSAGES("getOperationsMessages", "setOperationsMessages", 8, "Mensagens de Operações"),
-	SLA("getSla", "setSla", 9, "SLA"),
-	SERVICE_DEPENDENCY_AND_COMPOSITION("getServiceDependencyAndComposition", "setServiceDependencyAndComposition", 10, "Dependência de Serviços e Composições"),
-	TRACEABILITY("getTraceability", "setTraceability", 11, "Rastreabilidade");
+	NAME("Name", 2, "Nome"),
+	DESCRIPTION("Description", 3, "Descrição"),
+	ASSOCIATED_BUSINESS_PROCESS("AssociatedBusinessProcess", 4, "Processo de Negócio Associados"),
+	FUNCTIONAL_AREAS("FunctionalAreas", 5, "Áreas Funcionais"),
+	BUSINESS_ACTORES("BusinessActores", 6, "Atores do Negócio"),
+	CONTRACT_AND_OPERATIONS("ContractAndOperations", 7, "Contratos e Operações"),
+	OPERATIONS_MESSAGES("OperationsMessages", 8, "Mensagens de Operações"),
+	SLA("Sla", 9, "SLA"),
+	SERVICE_DEPENDENCY_AND_COMPOSITION("ServiceDependencyAndComposition", 10, "Dependência de Serviços e Composições"),
+	TRACEABILITY("Traceability", 11, "Rastreabilidade");
 	
-	String getMethodName;
-	String setMethodName;
+	String methodName;
 	Integer columnPosition;
 	String title;
 	
-	ColumnEnum(String methodName, String setMethodName, Integer columnPosition, String title) {
-		this.getMethodName = methodName;
-		this.setMethodName = setMethodName;
+	ColumnEnum(String methodName, Integer columnPosition, String title) {
+		this.methodName = methodName;
 		this.columnPosition = columnPosition;
 		this.title = title;
 	}
 	
-	public String methodName() {
-		return this.getMethodName;
-	}
-	
 	public String getMethodName() {
-		return this.getMethodName;
+		return "get" + this.methodName;
 	}
 	
 	public String setMethodName() {
-		return this.setMethodName;
+		return "set" + this.methodName;
 	}
 
 	public Integer getColumnPosition() {

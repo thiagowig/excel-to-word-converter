@@ -12,6 +12,8 @@ import br.com.zaul.converter.model.Service;
  */
 class WordWriter {
 	
+	def zipFileManager = new ZipFileManager(System.getProperty("java.io.tmpdir") + File.separator + "servicos.zip")
+	
 	/**
 	 * 
 	 * @param services
@@ -25,6 +27,8 @@ class WordWriter {
 			
 			saveFile(wordDocument, service)
 		}
+		
+		zipFileManager.close()
 	}
 	
 	/**
@@ -50,13 +54,19 @@ class WordWriter {
 	 * @return
 	 */
 	private generateDocumentSectionContent(XWPFDocument wordDocument, ColumnEnum column, Service service) {
-		def paragraphContent = wordDocument.createParagraph()
-		def runContent = paragraphContent.createRun()
 		def methodName = column.getMethodName()
-
-		runContent.setText(service."${methodName}"())
-		runContent.setFontSize(11)
-		runContent.setFontFamily("Cambria")
+		def paragraphs = service."${methodName}"().split("\n")
+		
+		for (paragraph in paragraphs) {
+			def paragraphContent = wordDocument.createParagraph()
+			def runContent = paragraphContent.createRun()
+			
+			runContent.setText(paragraph)
+			runContent.setFontSize(11)
+			runContent.setFontFamily("Cambria")			
+		}
+		
+		wordDocument.createParagraph()
 	}
 
 	/**
@@ -96,11 +106,17 @@ class WordWriter {
 	 * @param service
 	 */
 	void saveFile(XWPFDocument document, Service service) {
-		def fileName = "resources/output/${service.name}.docx"
+		def fileName = System.getProperty("java.io.tmpdir") + File.separator + "${service.name}.docx"
 		def outputStream = new FileOutputStream(new File(fileName))
 		document.write(outputStream)
 		outputStream.close()
 		
+		zipFileManager.addFile(fileName)
+		
 		println "Arquivo '${fileName}' criado"
+	}
+	
+	File getFile() {
+		zipFileManager.getZipFile()
 	}
 }

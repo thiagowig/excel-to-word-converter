@@ -13,8 +13,6 @@ import br.com.zaul.converter.model.Service;
  */
 class ExcelReader {
 	
-	final String excelFilePath = "resources/input/073EMP_Serviços Candidatos.xlsx"
-	
 	final Integer firstSheet = 2
 	final Integer firstRow = 2
 	
@@ -22,8 +20,8 @@ class ExcelReader {
 	 * 
 	 * @return
 	 */
-	Workbook read() {
-		def inputStream = new FileInputStream(new File(excelFilePath))
+	Workbook read(File file) {
+		def inputStream = new FileInputStream(file)
 		new XSSFWorkbook(inputStream)
 	}
 	
